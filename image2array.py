@@ -239,3 +239,142 @@ if __name__ == '__main__':
 
     index = np.arange(len(LGG))
     np.random.shuffle(index)
+    LGG_val_index = index[:len(LGG) / 10 * 3]
+    LGG_val_index.sort()
+    LGG_train_index = np.delete(np.arange(len(LGG)), LGG_val_index)
+
+    for i in LGG_val_index:
+        LGG_val.append(LGG[i])
+        LGG_val_label.append(LGG_label[i])
+    for i in LGG_train_index:
+        LGG_train.append(LGG[i])
+        LGG_train_label.append(LGG_label[i])
+
+
+    print(len(HGG_val), len(HGG_val_label), len(HGG_train), len(HGG_train_label))
+    print(len(LGG_val), len(LGG_val_label), len(LGG_train), len(LGG_train_label))
+
+
+
+
+    # Read data from file lists and labels
+    # try:
+    #     HGG_train_np, HGG_train_label_np = get_data(HGG_train, HGG_train_label)
+    #     print 'Start Writing HGG_train.pkl...'
+    #     write2File(HGG_train_np, HGG_train_label_np, 'HGG_train.pkl')
+
+    #     HGG_val_np, HGG_val_label_np = get_data(HGG_val, HGG_val_label)
+    #     print 'Start Writing HGG_val.pkl...'
+    #     write2File(HGG_val_np, HGG_val_label_np, 'HGG_val.pkl')
+
+    #     LGG_train_np, LGG_train_label_np = get_data(LGG_train, LGG_train_label)
+    #     print 'Start Writing LGG_train.pkl...'
+    #     write2File(LGG_train_np, LGG_train_label_np, 'LGG_train.pkl')
+
+    #     LGG_val_np, LGG_val_label_np = get_data(LGG_val, LGG_val_label)
+    #     print 'Start Writing LGG_val.pkl...'
+    #     write2File(LGG_val_np, LGG_val_label_np, 'LGG_val.pkl')
+
+    #     print 'Success!'
+    # except:
+    #     print 'Failed, ZannNenn'
+
+    HGG_val_np, HGG_val_label_np = get_data(HGG_val, HGG_val_label)
+    print('Start Writing HGG_val.npz...')
+    np.savez(data_base + 'HGG_val.npz', HGG_val_np, HGG_val_label_np)
+    # write2File(HGG_val_np, HGG_val_label_np, 'HGG_val.pkl')
+
+    HGG_train_np, HGG_train_label_np = get_data(HGG_train, HGG_train_label)
+    print('Start Writing HGG_train.npz...')
+    np.savez(data_base + 'HGG_train.npz', HGG_train_np, HGG_train_label_np)
+    # write2File(HGG_train_np, HGG_train_label_np, 'HGG_train.pkl')
+
+    LGG_val_np, LGG_val_label_np = get_data(LGG_val, LGG_val_label)
+    print('Start Writing LGG_val.npz...')
+    np.savez(data_base + 'LGG_val.npz', LGG_val_np, LGG_val_label_np)
+    # write2File(LGG_val_np, LGG_val_label_np, 'LGG_val.pkl')
+
+    LGG_train_np, LGG_train_label_np = get_data(LGG_train, LGG_train_label)
+    print('Start Writing LGG_train.npz...')
+    np.savez(data_base + 'LGG_train.npz', LGG_train_np, LGG_train_label_np)
+    # write2File(LGG_train_np, LGG_train_label_np, 'LGG_train.pkl')
+
+
+
+    
+
+
+
+
+
+    # print len(HGG_label), len(HGG_train), len(LGG_label), len(LGG_train)
+
+    # print 'HGG_label: ', HGG_label
+    # print ''
+    # print 'HGG_train: ', HGG_train
+    # print ''
+    # print 'LGG_label: ', LGG_label
+    # print ''
+    # print 'LGG_train: ', LGG_train
+
+    # HGG_train_np = np.empty([0, 4, 240, 240, 155], dtype = 'int16')
+    # HGG_temp_np = np.empty([0, 240, 240, 155], dtype = 'int16')
+    # HGG_train_label_np = np.empty([0, 240, 240, 155], dtype = 'int16')
+
+    # for filelist in HGG_train:
+    #     for filename in filelist:
+    #         img = sitk.ReadImage(filename)
+    #         imgdata = sitk.GetArrayFromImage(img) 
+    #         # print imgdata.shape
+    #         imgdata = imgdata.transpose((2, 1, 0))
+    #         HGG_temp_np = np.append(HGG_temp_np, imgdata.reshape(1, 240, 240, 155), axis = 0)
+    #         # print HGG_temp_np.shape
+    #     HGG_train_np = np.append(HGG_train_np, HGG_temp_np.reshape(1, 4, 240, 240, 155), axis = 0)
+    #     print HGG_train_np.shape
+    #     HGG_temp_np = np.empty([0, 240, 240, 155], dtype = 'int16')
+
+    # for filename in HGG_train_label:
+    #     img = sitk.ReadImage(filename)
+    #     imgdata = sitk.GetArrayFromImage(img)
+    #     imgdata = imgdata.transpose((2, 1, 0))
+    #     HGG_label_np = np.append(HGG_train_label_np, imgdata.reshape(1, 240, 240, 155), axis = 0)
+    #     print HGG_label.shape
+
+
+    # print 'Start Pickling Training Data...'
+    # write2File(HGG_train_np, HGG_train_label_np, 'HGG_train.pkl')
+    # print 'Training Data Saved!'
+
+
+    # LGG_train_np = np.empty([0, 4, 240, 240, 155], dtype = 'int16')
+    # LGG_temp_np = np.empty([0, 240, 240, 155], dtype = 'int16')
+    # LGG_train_label_np = np.empty([0, 240, 240, 155], dtype = 'int16')
+
+    # for filelist in LGG_train:
+    #     for filename in filelist:
+    #         img = sitk.ReadImage(filename)
+    #         imgdata = sitk.GetArrayFromImage(img) 
+    #         # print imgdata.shape
+    #         imgdata = imgdata.transpose((2, 1, 0))
+    #         LGG_temp_np = np.append(LGG_temp_np, imgdata.reshape(1, 240, 240, 155), axis = 0)
+    #         # print HGG_temp_np.shape
+    #     LGG_train_np = np.append(LGG_train_np, LGG_temp_np.reshape(1, 4, 240, 240, 155), axis = 0)
+    #     print LGG_train_np.shape
+    #     LGG_temp_np = np.empty([0, 240, 240, 155], dtype = 'int16')
+
+    # for filename in LGG_train_label:
+    #     img = sitk.ReadImage(filename)
+    #     imgdata = sitk.GetArrayFromImage(img)
+    #     imgdata = imgdata.transpose((2, 1, 0))
+    #     LGG_label_np = np.append(LGG_train_label_np, imgdata.reshape(1, 240, 240, 155), axis = 0)
+    #     print LGG_train_label_np.shape
+
+    # print 'Start Pickling Training Data...'
+    # write2File(HGG_train_np, HGG_train_label_np, 'HGG_train.pkl')
+    # print 'Training Data Saved!'
+
+
+
+    # np.save('/home/ff/data/Brain_Tumor/npy/HGG_train', HGG_train_np)    
+    # print HGG_train_np.shape
+    '''
