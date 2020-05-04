@@ -183,3 +183,18 @@ class new():
 			## Write matrix
 			f.write(self.data)
 			f.close()
+			
+		elif not fn.endswith('.mha'): ## File extension is not ".mha"
+			raise NameError('The input file name is not a mha file!')
+######################## WRITE_MHA - END - #############################
+
+############ UTILITY FUNCTIONS, NOT FOR PUBLIC USE - START - ###########
+	def _cast2int (self, l):
+		l_new=[]
+		for i in l:
+			if i.is_integer(): l_new.append(int(i))
+			else: l_new.append(i)
+		return l_new
+		
+	_shiftdim = lambda self, x, n: x.transpose(np.roll(range(x.ndim), -n))
+############# UTILITY FUNCTIONS, NOT FOR PUBLIC USE - END - ############
